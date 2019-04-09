@@ -566,3 +566,279 @@ function SoftwareDeveloper(favoriteLanguage) {
 let me = new SoftwareDeveloper('JavaScript')
 
 //console.log(me)
+
+//let engineer = new SoftwareDeveloper();
+//let programmer = new SoftwareDeveloper();
+
+//console.log(engineer);
+// SoftwareDeveloper { favoriteLanguage: 'JavaScript' }
+
+//console.log(programmer);
+// SoftwareDeveloper { favoriteLanguage: 'JavaScript' }
+
+function SoftwareDeveloper2(name) {
+    this.favoriteLanguage = 'JavaScript';
+    this.name = name;
+}
+
+let engineer = new SoftwareDeveloper2('Abdo')
+
+//console.log(engineer)
+
+function Hero(name, role) {
+    this.name = name;
+    this.role = role;
+
+    this.introduce = function () {
+        console.log(`My name is ${this.name} and I am a ${this.role}.`);
+    }
+
+}
+const Taylor = new Hero('Taylor', 'mother')
+//Taylor.introduce()
+
+const riley = new Hero('Riley', 'coach')
+//console.log(riley.role)
+
+//riley.introduce()
+
+/*
+
+Now it's your turn to create a constructor function. Declare a
+`Sandwich` constructor function that takes three parameters:
+
+1. `bread` (string) - the type of bread for the sandwich (e.g. "Wheat")
+2. `meat` (array) - the meats to put on the sandwich
+   (e.g. `[]` for a vegetarian sandwich!)
+3. `vegetables` (array) - the vegetables to include in the sandwich
+
+*/
+function Sandwich(bread, meat, vegetables) {
+    this.bread = bread;
+    this.meat = meat;
+    this.vegetables = vegetables;
+}
+
+const shawarma = new Sandwich('Wheat', 'Chicken', ['Onion', 'Pfeffer'])
+//Another wired way to check the type of constructor function 
+// true if Sandwich is a constructor function of object shawarma which it is.
+//console.log(shawarma instanceof Sandwich)
+
+
+var sayName = function (lang1, lang2, lang3) {
+    console.log(`My name is ${this.name} and I know ${lang1}, ${lang2}, and ${lang3}.`)
+};
+
+var stacey = {
+    name: 'Stacey',
+    age: 34
+};
+
+var languages2 = ['JavaScript', 'Ruby', 'Python'];
+// Here stacey is replace with this in the function sayName and that
+// because call()
+//sayName.call(stacey, languages2[0], languages2[1], languages2[2])
+
+// we can do more with apply() , apply can take array languages2 and
+// expend that array like in call
+//sayName.apply(stacey, languages2)
+
+// bind() it is just like call but it is not invoked the function
+// instead it return a new function with the argements that passed
+// though it. So 
+let newfn = sayName.bind(stacey, languages2[0], languages2[1], languages2[2])
+// would return in newfn a copy of sayName which can invoked later.
+//newfn()
+
+// new Binding meaning 'this' in new will mean this object.
+
+function Animal(color, name, type) {
+    //this = {}
+    this.color = color;
+    this.name = name;
+    this.type = type;
+};
+
+var zebra = new Animal('black and white', 'Zorro', 'Zebra');
+//console.log(zebra)
+
+const mockingbird = {
+    title: 'To Kill a Mockingbird',
+    describe: function () {
+        console.log(`${this.title} is a classic novel`);
+    }
+};
+
+//mockingbird.describe();
+// 'To Kill a Mockingbird is a classic novel'
+
+const pride = {
+    title: 'Pride and Prejudice'
+};
+
+//mockingbird.describe.call(pride);
+// 'Pride and Prejudice is a classic novel'
+
+const dog0 = {
+    age: 5,
+    growOneYear: function () {
+        this.age += 1;
+    }
+};
+
+function invokeTwice(cb) {
+    cb();
+    cb();
+}
+const myGrow0 = dog0.growOneYear.bind(dog0);
+invokeTwice(myGrow0)
+
+//console.log(dog0.age)
+// this is the last thing about call, apply and bind.
+const driver = {
+    name: 'Danica',
+    displayName: function () {
+        console.log(`Name: ${this.name}`);
+    }
+};
+
+const car = {
+    name: 'Fusion'
+};
+
+const fusion = driver.displayName.bind(car)
+//fusion()
+// So the prototype allows us to create the method outside the object.
+function Apple(color, weight) {
+    this.color = color;
+    this.weight = weight;
+}
+// that means saving memory and 
+Apple.prototype = {
+    eat: function () {
+        return "eat the apple";
+    },
+    throw: function () {
+        return 'throw the apple';
+    }
+}
+
+var apple1 = new Apple('red', 99);
+var apple2 = new Apple('gree', 109);
+var apple3 = new Apple('yellow', 299);
+// the prototype object saved as __proto__:ojbect inside the original object.
+// __proto__: object is a link with the object that we can access through that object.
+// but we cannot modify the __proto__ :object through the object (Constructor function)
+//we can invoke (call) any method inside __proto__ with your object.
+
+// (A) normal constructor function
+
+function Dalmatian(name) {
+    this.name = name;
+
+    this.bark = function () {
+        console.log(`${this.name} barks!`);
+    };
+}
+
+// (B) constructor function only with variables and the method through the prototype 
+
+function Dalmatian(name) {
+    this.name = name;
+}
+
+Dalmatian.prototype.bark = function () {
+    console.log(`${this.name} barks!`);
+};
+
+
+//join()
+
+const my2Array = [1, 2, 3];
+// console.log(my2Array.join(''));
+// 123
+
+function Hamster() {
+    this.hasFur = true;
+}
+
+let waffle = new Hamster();
+let pancake = new Hamster();
+
+Hamster.prototype.eat = function () {
+    console.log('Chomp chomp chomp!');
+};
+
+//waffle.eat();
+// 'Chomp chomp chomp!'
+
+//pancake.eat();
+// 'Chomp chomp chomp!'
+
+Hamster.prototype = {
+    isHungry: false,
+    color: 'brown'
+};
+
+//console.log(waffle.color);
+// undefined
+
+//waffle.eat();
+// 'Chomp chomp chomp!'
+
+//console.log(pancake.isHungry);
+// undefined
+
+const muffin = new Hamster();
+
+//muffin.eat();
+// TypeError: muffin.eat is not a function
+
+//console.log(muffin.isHungry);
+// false
+
+//console.log(muffin.color);
+// 'brown'
+
+
+function Phone() {
+    this.operatingSystem = 'Android';
+}
+
+Phone.prototype.screenSize = 6;
+
+const myPhone = new Phone();
+
+// hasOwnProperty check whether this method its own property or not.
+const own = myPhone.hasOwnProperty('operatingSystem');
+// true means yes it is.
+//console.log(own);
+// true
+
+const inherited = myPhone.hasOwnProperty('screenSize');
+
+//console.log(inherited);
+// false
+
+const rodent = {
+    favoriteFood: 'cheese',
+    hasTail: true
+};
+
+function Mouse() {
+    this.favoriteFood = 'cheese';
+}
+
+Mouse.prototype = rodent;
+
+const ralph = new Mouse();
+
+const result = rodent.isPrototypeOf(ralph);
+
+console.log(result);
+// true
+// Object.getPrototypeof return a copy of the prototype which is connected to this object.
+const myPrototype = Object.getPrototypeOf(ralph);
+
+console.log(myPrototype);
+// { favoriteFood: 'cheese', hasTail: true }
