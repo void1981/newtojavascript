@@ -337,7 +337,7 @@ const REnames = ['David', 'Richard', 'Veronika'];
 const shortNames = REnames.filter(function (name) {
     return (name.length < 8);
 });
-console.log(shortNames)
+//console.log(shortNames)
 
 /* Using filter()
  *
@@ -464,3 +464,97 @@ function introduceMyself() {
 
 introduceMyself();
 // 'Hello, student, I'm Andrew!'
+
+function myCounter() {
+    let count = 0;
+
+    return function () {
+        count += 1;
+        return count;
+    };
+}
+let counter = myCounter();
+counter()
+counter()
+counter()
+//console.log(counter());
+
+// Here are two function which I think they should return the same result
+// the difference is the first one has a anoymous function while the second one has a normal function.
+
+function expandArray0() {
+    let myArray = [1, 1, 1];
+    return (() => (myArray.push(1)))
+}
+
+function expandArray1() {
+    let myArray = [1, 1, 1];
+    return function () {
+        myArray.push(1);
+        return myArray;
+    }
+}
+
+let Arr0 = expandArray0();
+let Arr1 = expandArray1();
+// this is wired.
+//console.log(Arr0())
+//console.log(Arr1())
+
+//4
+//[ 1, 1, 1, 1 ]
+
+// this is what I know as recursion.
+let out = 0;
+
+function expand() {
+
+    if (out > 4) {
+        return out;
+    } else {
+        out += 1;
+        return expand();
+    }
+}
+
+let outexpand = expand();
+//console.log(outexpand)
+
+
+//Function Declarations vs Function Expressions
+
+// returnHello is a function declarations
+function returnHello() {
+    return 'Hello!';
+}
+// here myfunction is called function expression.
+// anonymous
+const myFunction0 = function () {
+    return 'Hello!';
+};
+
+// named
+const myFunction1 = function returnHello() {
+    return 'Hello!';
+};
+
+//Immediately Invoked function expressions
+(function sayHi() {
+    //console.log('Hi there!');
+})();
+// alerts 'Hi there!'
+
+(function (name) {
+    //console.log(`Hi, ${name}`);
+})('Andrew');
+
+// alerts 'Hi, Andrew'
+
+(function (x, y) {
+    //console.log(x * y);
+})(2, 3);
+
+// 6
+
+//((x, y) => (console.log(x * y)))(2, 3) //6
+//(((x, y) => (console.log(x * y)))(2, 3))
