@@ -558,3 +558,11 @@ const myFunction1 = function returnHello() {
 
 //((x, y) => (console.log(x * y)))(2, 3) //6
 //(((x, y) => (console.log(x * y)))(2, 3))
+// Constructor Functions
+// 
+function SoftwareDeveloper(favoriteLanguage) {
+    this.favoriteLanguage = favoriteLanguage;
+}
+let me = new SoftwareDeveloper('JavaScript')
+
+//console.log(me)
